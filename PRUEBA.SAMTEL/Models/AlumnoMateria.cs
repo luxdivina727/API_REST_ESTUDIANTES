@@ -8,7 +8,8 @@ namespace PRUEBA.SAMTEL.Models
     public class AlumnoMateria
     {
         public Int64 AlumnoMateriaId { get; set; }
-        public Alumno Alumno{ get; set; }
-        public Materia Materia{ get; set; }
+        public Int64 AlumnoId{ get; set; }
+        public Int64 MateriaId{ get; set; }
+        public string AlumnoMateriaNota { get; set; }
     }
 }

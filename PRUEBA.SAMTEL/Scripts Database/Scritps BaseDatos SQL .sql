@@ -3,6 +3,8 @@ IF NOT EXISTS (SELECT * FROM sysdatabases WHERE (name = 'PRUEBA_SAMTEL'))
 BEGIN
 	CREATE DATABASE PRUEBA_SAMTEL
 END
+GO
+use PRUEBA_SAMTEL
 -------------------- CREACIÓN TABLAS -----------------------------------------------------------
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'TipoIdentificacion')
 BEGIN
@@ -12,6 +14,7 @@ BEGIN
 		CONSTRAINT [PK_TipoIdentificacion] PRIMARY KEY CLUSTERED ([TipoIdentificacionId] ASC)
 	);
 END
+GO
 
 IF  EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'TipoIdentificacion')
 BEGIN
@@ -20,6 +23,7 @@ BEGIN
 	INSERT INTO [dbo].[TipoIdentificacion] (TipoIdentificacionNombre) VALUES ('Cédula Extranjería')
 
 END
+GO
 
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Alumno')
 BEGIN
@@ -35,22 +39,27 @@ BEGIN
 		CONSTRAINT [PK_Alumno] PRIMARY KEY CLUSTERED ([AlumnoId] ASC)
 	);
 END
+GO
+
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Alumno')
 BEGIN
 	ALTER TABLE [dbo].[Alumno]
 	ADD CONSTRAINT [FK_Alumno_TipoIdentificacion] FOREIGN KEY ([TipoIdentificacionId]) REFERENCES [dbo].[TipoIdentificacion] ([TipoIdentificacionId]);
 
 END
+GO
 
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Materia')
 BEGIN
 	CREATE TABLE [dbo].[Materia] (
 		[MateriaId]                             BIGINT          IDENTITY (1, 1) NOT NULL,
 		[MateriaNombre]							VARCHAR (MAX)					NOT NULL,
+		[MateriaObservacion]					VARCHAR (MAX)					NOT NULL,
 		[MateriaNumeroHoras]                    INT								NOT NULL,
 		CONSTRAINT [PK_Materia] PRIMARY KEY CLUSTERED ([MateriaId] ASC)
 	);
 END
+GO
 
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'AlumnoMateria')
 BEGIN
@@ -62,6 +71,8 @@ BEGIN
 		CONSTRAINT [PK_AlumnoMateria] PRIMARY KEY CLUSTERED ([AlumnoMateriaId] ASC)
 	);
 END
+GO
+
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'AlumnoMateria')
 BEGIN
 	ALTER TABLE [dbo].[AlumnoMateria]
@@ -122,6 +133,7 @@ GO
 CREATE PROCEDURE [dbo].[InsertarMateria]
 (
 	@materiaNombre VARCHAR(MAX),
+	@materiaObservacion VARCHAR(MAX),
 	@materiaNumeroHoras INT
 )
 AS
@@ -130,12 +142,14 @@ BEGIN
 	INSERT INTO [dbo].[Materia]
 	(
 		MateriaNombre,
-		MateriaNumeroHoras
+		MateriaNumeroHoras,
+		MateriaObservacion
 	)
 	VALUES 
 	(	
 		@materiaNombre,
-		@materiaNumeroHoras
+		@materiaNumeroHoras,
+		@materiaObservacion
 	)
 
 	SELECT CAST(SCOPE_IDENTITY() AS BIGINT)
@@ -149,7 +163,8 @@ GO
 CREATE PROCEDURE [dbo].[InsertarAlumnoMateria]
 (
 	@alumnoId BIGINT,
-	@materiaId BIGINT
+	@materiaId BIGINT,
+	@alumnoMateriaNota BIGINT
 )
 AS
 BEGIN
@@ -157,12 +172,14 @@ BEGIN
 	INSERT INTO [dbo].[AlumnoMateria]
 	(
 		AlumnoId,
-		MateriaId
+		MateriaId,
+		AlumnoMateriaNota
 	)
 	VALUES 
 	(	
 		@alumnoId,
-		@materiaId
+		@materiaId,
+		@alumnoMateriaNota
 	)
 
 	SELECT CAST(SCOPE_IDENTITY() AS BIGINT)

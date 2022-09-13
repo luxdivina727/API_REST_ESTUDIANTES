@@ -6,7 +6,7 @@ using PRUEBA.SAMTEL.Models;
 
 namespace PRUEBA.SAMTEL.Data
 {
-    public class AlumnoMateriaMateriaData
+    public class AlumnoMateriaData
     {
         public static List<AlumnoMateria> Listar()
         {
@@ -29,8 +29,9 @@ namespace PRUEBA.SAMTEL.Data
                             listadoAlumnoMaterias.Add(new AlumnoMateria()
                             {
                                 AlumnoMateriaId = Convert.ToInt64(dr["AlumnoMateriaId"]),
-                                Alumno = new Alumno { AlumnoId = Convert.ToInt64(dr["AlumnoId"]) },
-                                Materia = new Materia { MateriaId = Convert.ToInt64(dr["MateriaId"]) },
+                                AlumnoId = Convert.ToInt64(dr["AlumnoId"]) ,
+                                MateriaId = Convert.ToInt64(dr["MateriaId"]),
+                                AlumnoMateriaNota = Convert.ToString(dr["AlumnoMateriaNota"]),
                             });
                         }
 
@@ -52,8 +53,9 @@ namespace PRUEBA.SAMTEL.Data
             {
                 SqlCommand cmd = new SqlCommand("InsertarAlumnoMateria", oConexion);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@alumnoId", alumnoMateria.Alumno.AlumnoId);
-                cmd.Parameters.AddWithValue("@materiaId", alumnoMateria.Materia.MateriaId);
+                cmd.Parameters.AddWithValue("@alumnoId", alumnoMateria.AlumnoId);
+                cmd.Parameters.AddWithValue("@materiaId", alumnoMateria.MateriaId);
+                cmd.Parameters.AddWithValue("@alumnoMateriaNota", alumnoMateria.AlumnoMateriaNota);
 
                 try
                 {

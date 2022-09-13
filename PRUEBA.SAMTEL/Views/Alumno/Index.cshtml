@@ -2,9 +2,10 @@
 
 @{
     ViewBag.Title = "Listado de Alumnos";
+
 }
 
-<h2>Index</h2>
+<h2>Listado de Alumnos</h2>
 
 <p>
     @Html.ActionLink("Crear Alumnos", "Create")
@@ -12,6 +13,7 @@
 <table class="table">
     <tr>
         <th>
+
             @Html.DisplayNameFor(model => model.AlumnoNombre)
         </th>
         <th>
@@ -53,9 +55,7 @@
             @Html.DisplayFor(modelItem => item.AlumnoIdentificacion)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AlumnoId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AlumnoId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AlumnoId })
+            @Html.ActionLink("Registrar Nota", "RegisterNote", new { alumnoId = item.AlumnoId }) |
         </td>
     </tr>
 }

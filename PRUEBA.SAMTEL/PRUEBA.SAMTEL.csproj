@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AlumnoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MateriaController.cs" />
     <Compile Include="Data\AlumnoData.cs" />
     <Compile Include="Data\AlumnoMateriaData.cs" />
     <Compile Include="Data\Conexion.cs" />
@@ -173,7 +174,10 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Alumno\Index.cshtml" />
-    <Content Include="Views\Alumno\View.cshtml" />
+    <Content Include="Views\Alumno\Create.cshtml" />
+    <Content Include="Views\Materia\Index.cshtml" />
+    <Content Include="Views\Materia\Create.cshtml" />
+    <Content Include="Views\Alumno\RegisterNote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

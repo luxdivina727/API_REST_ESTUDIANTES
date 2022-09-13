@@ -13,7 +13,8 @@ namespace PRUEBA.SAMTEL.Models
         public string AlumnoDireccion { get; set; }
         public Int64 AlumnoTelefono { get; set; }
         public DateTime AlumnoFechaNacimiento { get; set; }
-        public TipoIdentificacion TipoIdentificacion { get; set; }
+        public Int16 TipoIdentificacionId{ get; set; }
         public Int64 AlumnoIdentificacion { get; set; }
+
     }
 }

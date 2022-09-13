@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using PRUEBA.SAMTEL.Models;
+    using System.Web.Mvc;
 
 namespace PRUEBA.SAMTEL.Controllers
 {
@@ -12,12 +12,41 @@ namespace PRUEBA.SAMTEL.Controllers
         {
             return View(Data.AlumnoData.Listar());
         }
-
         public ActionResult Create()
         {
-            ViewBag.Message = "Your application description page.";
-
+            this.ViewBag.TipoIdentificacionId = new SelectList(Data.TipoIdentificacionData.Listar(), "TipoIdentificacionId", "TipoIdentificacionNombre");
             return View();
+        }
+        public ActionResult RegisterNote(Int64 alumnoId)
+        {
+            this.ViewBag.MateriaId = new SelectList(Data.MateriaData.Listar(), "MateriaId", "MateriaNombre");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult RegisterNote(Int64 alumnoId, AlumnoMateria alumno)
+        {
+            if (ModelState.IsValid)
+            {
+                alumno.AlumnoId= alumnoId;
+                Data.AlumnoMateriaData.Registrar(alumno);
+
+                return RedirectToAction("Index");
+            }
+            this.ViewBag.MateriaId = new SelectList(Data.MateriaData.Listar(), "MateriaId", "MateriaNombre");
+            return View(alumno);
+        }
+        [HttpPost]
+        public ActionResult Create(Alumno alumno)
+        {
+            if (ModelState.IsValid)
+            {
+                Data.AlumnoData.Registrar(alumno);
+
+                return RedirectToAction("Index");
+            }
+
+            this.ViewBag.TipoIdentificacionId = new SelectList(Data.TipoIdentificacionData.Listar(), "TipoIdentificacionId", "TipoIdentificacionNombre");
+            return View(alumno);
         }
 
         public ActionResult Contact()

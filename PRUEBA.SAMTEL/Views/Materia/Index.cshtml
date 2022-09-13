@@ -1,0 +1,40 @@
+﻿@model IEnumerable<PRUEBA.SAMTEL.Models.Materia>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Consulta de Materias</h2>
+
+<p>
+    @Html.ActionLink("Crear Materias", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MateriaNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MateriaNumeroHoras)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MateriaObservacion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MateriaNombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MateriaNumeroHoras)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MateriaObservacion)
+        </td>
+    </tr>
+}
+
+</table>

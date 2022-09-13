@@ -35,7 +35,7 @@ namespace PRUEBA.SAMTEL.Data
                                 AlumnoDireccion = Convert.ToString(dr["AlumnoDireccion"]),
                                 AlumnoTelefono = Convert.ToInt64(dr["AlumnoTelefono"]),
                                 AlumnoFechaNacimiento = Convert.ToDateTime(dr["AlumnoFechaNacimiento"]),
-                                TipoIdentificacion = new TipoIdentificacion { TipoIdentificacionId = Convert.ToInt16(dr["TipoIdentificacionId"]) },
+                                TipoIdentificacionId = Convert.ToInt16(dr["TipoIdentificacionId"]),
                                 AlumnoIdentificacion = Convert.ToInt64(dr["AlumnoIdentificacion"]),
                             });
                         }
@@ -63,7 +63,7 @@ namespace PRUEBA.SAMTEL.Data
                 cmd.Parameters.AddWithValue("@alumnoDireccion", alumno.AlumnoDireccion);
                 cmd.Parameters.AddWithValue("@alumnoTelefono", alumno.AlumnoTelefono);
                 cmd.Parameters.AddWithValue("@alumnoFechaNacimiento", alumno.AlumnoFechaNacimiento);
-                cmd.Parameters.AddWithValue("@tipoIdentificacionId", alumno.TipoIdentificacion.TipoIdentificacionId);
+                cmd.Parameters.AddWithValue("@tipoIdentificacionId", alumno.TipoIdentificacionId);
                 cmd.Parameters.AddWithValue("@alumnoIdentificacion", alumno.AlumnoIdentificacion);
 
                 try

@@ -31,6 +31,7 @@ namespace PRUEBA.SAMTEL.Data
                                 MateriaId = Convert.ToInt64(dr["MateriaId"]),
                                 MateriaNombre = Convert.ToString(dr["MateriaNombre"]),
                                 MateriaNumeroHoras = Convert.ToInt32(dr["MateriaNumeroHoras"]),
+                                MateriaObservacion = Convert.ToString(dr["MateriaObservacion"]),
                             });
                         }
 
@@ -46,14 +47,15 @@ namespace PRUEBA.SAMTEL.Data
                 }
             }
         }
-        public static bool Registrar(Materia alumno)
+        public static bool Registrar(Materia materia)
         {
             using (SqlConnection oConexion = new SqlConnection(Conexion.rutaConexion()))
             {
                 SqlCommand cmd = new SqlCommand("InsertarMateria", oConexion);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@materiaNombre", alumno.MateriaNombre);
-                cmd.Parameters.AddWithValue("@materiaNumeroHoras", alumno.MateriaNombre);
+                cmd.Parameters.AddWithValue("@materiaNombre", materia.MateriaNombre);
+                cmd.Parameters.AddWithValue("@materiaObservacion", materia.MateriaObservacion);
+                cmd.Parameters.AddWithValue("@materiaNumeroHoras", materia.MateriaNumeroHoras);
 
                 try
                 {
